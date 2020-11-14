@@ -1,6 +1,12 @@
 " set leader key
 let g:mapleader=';'
 
+" colorscheme
+autocmd vimenter * colorscheme darkblue
+
+" default complete
+setglobal complete-=i
+
 " no backup file
 set nobackup
 set nowritebackup
@@ -45,6 +51,7 @@ nnoremap <leader>t :tabnew<CR>
 nnoremap <leader>b :call CompileRunGcc()<CR>
 nnoremap <leader>1 :NERDTreeToggle<CR>
 nnoremap <leader>2 :ls<CR>
+nnoremap <leader>3 :b#<CR>
 
 " fast runing
 func! CompileRunGcc()
@@ -67,9 +74,6 @@ func! CompileRunGcc()
     elseif &filetype == "go"
         exec "!go build %<"
         exec "!time go run %"
-    elseif &filetype == "mkd"
-        exec "!~/.vim/markdown.pl % > %.html &"
-        exec "!firefox %.html &"
     endif
 endfunc
 
@@ -78,17 +82,26 @@ endfunc
 call plug#begin('~/.vim/plugged')
 " Declare the list of plugins.
 Plug 'junegunn/vim-easy-align'
-Plug 'skywind3000/quickmenu.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'preservim/nerdtree', {'on': 'NERDTreeToggle'}
+Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-startify'
-Plug 'ycm-core/YouCompleteMe'
+Plug 'ycm-core/YouCompleteMe', {'commit':'d98f896', 'on': []}
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'lervag/vimtex'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.vim'
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
@@ -104,7 +117,8 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " ctags config
-set tags=./.tags;.tags
+set tags=./.tags;,.tags
+set tags+=~/anaconda3/lib/python3.7/.tags
 " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
 " 所生成的数据文件的名称
@@ -142,6 +156,10 @@ let g:ycm_extra_conf_vim_data = [
             \ "g:ycm_python_sys_path"
             \]
 let g:ycm_global_ycm_extra_conf = "~/.global_extra_conf.py"
+augroup load_ycm
+    autocmd!
+    autocmd InsertEnter * call plug#load('YouCompleteMe') | autocmd! load_ycm
+augroup END
 
 " vim-snippets config
 " plz don't set the following directories as absolute paths
@@ -149,6 +167,8 @@ let g:UltiSnipsSnippetDirectories=[
             \ "UltiSnips",
             \ "mysnippets"
             \]
+let g:my_python_snip_file = "~/.vim/plugged/vim-snippets/mysnippets/python.snippets"
+nnoremap <leader>es :exe 'vsp ' my_python_snip_file<CR>
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -157,6 +177,28 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrgger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+let g:UltiSnipsListSnippets="<s-tab>"
+let g:UltiSnipsJumpForwardTrgger = "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
 let g:ultisnips_python_style="google"
+inoremap <c-x><c-k> <c-x><c-k>
+
+" Use fontawesome icons as signs
+let g:gitgutter_sign_added = '+'
+let g:gitgutter_sign_modified = '>'
+let g:gitgutter_sign_removed = '-'
+let g:gitgutter_sign_removed_first_line = '^'
+let g:gitgutter_sign_modified_removed = '<'
+
+" airline
+let g:airline_theme='powerlineish'
+
+" tagbar
+nnoremap <leader>` :TagbarToggle<CR>
+
+" vim-tex
+let g:tex_flavor = 'latex'
+let g:vimtex_view_general_viewer = 'SumatraPDF.exe'
+let g:vimtex_quickfix_mode = 0
+let g:vimtex_view_general_options = '-reuse-instance @pdf'
+let g:vimtex_view_general_options_latexmk = '-reuse-instance'
