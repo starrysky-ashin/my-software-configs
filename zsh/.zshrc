@@ -99,6 +99,47 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> display config >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# prompt
+# We keep the prompt as concise as possible by removing both user and host names.
+prompt_context() {
+    if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+        # use the user name and host name as prompt
+        # prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
+        
+        # only use user name as prompt
+        # prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
+         
+        # only use host name as prompt
+        # prompt_segment black default "%(!.%{%F{yellow}%}.)$HOST"
+    fi
+}
+
+# colors
+# set dircolor by the .dircolors file
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+        alias ls='ls --color=auto'
+        alias dir='dir --color=auto'
+        alias vdir='vdir --color=auto'
+        alias grep='grep --color=auto'
+        alias fgrep='fgrep --color=auto'
+        alias egrep='egrep --color=auto'
+fi
+# <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< display config <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> software config >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# tmux
+DISABLE_AUTO_TITLE=true
+alias tn='tmux new-session -s'
+alias tk='tmux kill-session -t'
+alias ta='tmux a -t'
+alias tl='tmux ls'
+
+# autojump
+. /usr/share/autojump/autojump.sh
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/starrysky/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
@@ -113,31 +154,17 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+# <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< software config <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-# tmux config
-DISABLE_AUTO_TITLE=true
-
-# set path
-export PRACTICE=/mnt/c/Users/starrysky/OneDrive/Practice
-export MARS=/mnt/c/Users/starrysky/OneDrive/Projects/Mars
-
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> common config >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # bindkey
 bindkey \^U backward-kill-line
+# <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< common config <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-# change prompt
-prompt_context() {
-    if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-        # prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
-    fi
-}
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> export ans alias >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# export
+export PATH="$PATH"
 
-# set colors
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-        alias ls='ls --color=auto'
-        alias dir='dir --color=auto'
-        alias vdir='vdir --color=auto'
-        alias grep='grep --color=auto'
-        alias fgrep='fgrep --color=auto'
-        alias egrep='egrep --color=auto'
-fi
+# alias
+#
+# <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< export and alias <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
