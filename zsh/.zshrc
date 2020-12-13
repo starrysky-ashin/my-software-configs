@@ -132,10 +132,6 @@ fi
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> software config >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # tmux
 DISABLE_AUTO_TITLE=true
-alias tn='tmux new-session -s'
-alias tk='tmux kill-session -t'
-alias ta='tmux a -t'
-alias tl='tmux ls'
 
 # autojump
 . /usr/share/autojump/autojump.sh
@@ -166,5 +162,10 @@ bindkey \^U backward-kill-line
 export PATH="$PATH"
 
 # alias
-#
+# alias for tmux
+alias tn='tmux new-session -s'
+alias tk='tmux kill-session -t'
+alias ta='tmux a -t'
+alias tl='tmux ls'
+
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< export and alias <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
