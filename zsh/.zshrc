@@ -102,7 +102,7 @@ source $ZSH/oh-my-zsh.sh
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> display config >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # prompt
-# We keep the prompt as concise as possible by removing both user and host names.
+# Currently, we keep the prompt as concise as possible by removing both user and host names.
 prompt_context() {
     if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
         # use the user name and host name as prompt
