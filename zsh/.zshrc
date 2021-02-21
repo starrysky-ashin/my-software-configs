@@ -164,7 +164,6 @@ export PATH="$PATH"
 # alias
 # alias for tmux
 alias tn='tmux new-session -s'
-alias tk='tmux kill-session -t'
 alias ta='tmux a -t'
 alias tl='tmux ls'
 
