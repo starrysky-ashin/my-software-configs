@@ -210,6 +210,8 @@ map <leader>wj <C-w>j
 map <leader>wk <C-w>k
 map <leader>wh <C-w>h
 map <leader>wl <C-w>l
+map <leader>ww <C-w>w
+map <leader>wp <C-w>p
 
 " Close current window"
 map <leader>wc :q<cr>
@@ -243,9 +245,9 @@ map <leader>tm :tabmove<cr>
 map <leader>tl :tabnext<cr>
 map <leader>th :tabprevious<cr>
 
-" Let 'tt' toggle between this and the last "
+" Let 'tp' toggle between this and the last "
 let g:lasttab = 1
-nmap <leader>tt :exe "tabn ".g:lasttab<CR>
+nmap <leader>tp :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
 " Open a new tab with current buffer's path
@@ -289,6 +291,9 @@ inoremap { {}<ESC>i
 inoremap " ""<ESC>i
 inoremap ' ''<ESC>i
 inoremap jk <ESC>
+
+" Remap for visual mode"
+vnoremap <C-e> <ESC>
 
 " Delete trailing white space on save, useful for some filetypes"
 fun! CleanExtraSpaces()
