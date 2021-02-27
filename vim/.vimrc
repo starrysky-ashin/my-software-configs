@@ -462,7 +462,7 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => NERDTree config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <leader>rr :NERDTreeToggle<CR>:<C-w>=<CR>
+nnoremap <leader>rr :NERDTreeToggle<CR><C-w>=<CR>
 let g:NERDTreeWinPos = "right"
 let NERDTreeShowHidden=1
 " autocmd vimenter * NERDTree
