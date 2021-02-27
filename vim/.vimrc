@@ -462,7 +462,8 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => NERDTree config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <leader>rr :NERDTreeToggle<CR>
+nnoremap <leader>rr :NERDTreeToggle<CR>:<C-w>=<CR>
+let g:NERDTreeWinPos = "right"
 let NERDTreeShowHidden=1
 " autocmd vimenter * NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
