@@ -207,13 +207,12 @@ cnoremap <C-f> <Right>
 cnoremap <c-k> <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<CR>
 
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Operations related to windows, buffers, and tabs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map <space> to / (search) and <C-space> to ? (backwards search)"
 map <space> /
-map <C-space> ?
+map <C-g> ?
 
 " Disable highlight when <leader><cr> is pressed"
 map <silent> <leader><cr> :noh<cr>
@@ -306,7 +305,6 @@ inoremap ' ''<ESC>i
 inoremap jk <ESC>
 inoremap <C-d> <Del>
 inoremap <C-k> <C-o>D
-inoremap <C-e> <ESC>
 
 " Remap for normal mode"
 nnoremap <C-j> o<ESC>
