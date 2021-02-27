@@ -8,6 +8,7 @@
 "   -> Files and backups
 "   -> Text, tab and indent related
 "   -> Visual mode related
+"   -> Command mode related
 "   -> Operations related to windows, buffers and tabs
 "   -> Status line
 "   -> Editing mappings
@@ -196,6 +197,18 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Command mode related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Bash like keys for the command line"
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <c-k> <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<CR>
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Operations related to windows, buffers, and tabs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map <space> to / (search) and <C-space> to ? (backwards search)"
@@ -291,6 +304,12 @@ inoremap { {}<ESC>i
 inoremap " ""<ESC>i
 inoremap ' ''<ESC>i
 inoremap jk <ESC>
+inoremap <C-d> <Del>
+inoremap <C-k> <C-o>D
+inoremap <C-e> <ESC>
+
+" Remap for normal mode"
+nnoremap <C-j> o<ESC>
 
 " Remap for visual mode"
 vnoremap <C-e> <ESC>
