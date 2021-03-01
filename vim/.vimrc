@@ -217,13 +217,8 @@ map <C-g> ?
 " Disable highlight when <leader><cr> is pressed"
 map <silent> <leader><cr> :noh<cr>
 
-" Smart way to move between windows"
-map <leader>wj <C-w>j
-map <leader>wk <C-w>k
-map <leader>wh <C-w>h
-map <leader>wl <C-w>l
-map <leader>ww <C-w>w
-map <leader>wp <C-w>p
+" Remap the prefix key of window operations"
+map <leader>w <C-w>
 
 " Close current window"
 map <leader>wc :q<cr>
@@ -234,13 +229,12 @@ map <leader>wa :qa<cr>
 " Keep only current window"
 map <leader>wo :only<cr>
 
-" Split windows"
-map <leader>ws <C-w>s
-map <leader>wv <C-w>v
+" Smart way to switch buffers according to the order of buffer list
+map <leader>bk :bnext<cr>
+map <leader>bj :bprevious<cr>
 
-" Smart way to switch between buffers
-map <leader>bl :bnext<cr>
-map <leader>bh :bprevious<cr>
+" Switch to the buffer previously opened in current window"
+map <leader>bp :b#<cr>
 
 " Close the current buffer"
 map <leader>bc :Bclose<cr>
@@ -253,7 +247,8 @@ map <leader>ba :bufdo bd<cr>
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove<cr>
+map <leader>tm :tabmove +1<cr>
+map <leader>tM :tabmove -1<cr>
 map <leader>tl :tabnext<cr>
 map <leader>th :tabprevious<cr>
 
@@ -305,6 +300,8 @@ inoremap ' ''<ESC>i
 inoremap jk <ESC>
 inoremap <C-d> <Del>
 inoremap <C-k> <C-o>D
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
 
 " Remap for normal mode"
 nnoremap <C-j> o<ESC>
@@ -591,7 +588,7 @@ let g:airline_theme='powerlineish'
 " => tagbar config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tagbar
-nnoremap <leader>aa :TagbarToggle<CR>
+nnoremap <leader>aa :TagbarToggle<CR><C-w>=
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
