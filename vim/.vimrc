@@ -1,4 +1,4 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Maintainer: jinxin.ashin@outlook.com
 "
 " Sections:
@@ -18,7 +18,6 @@
 "   -> Helper functions
 "   -> Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -219,6 +218,9 @@ map <silent> <leader><cr> :noh<cr>
 
 " Remap the prefix key of window operations"
 map <leader>w <C-w>
+
+" Move windows"
+map <leader>wm <C-w>r
 
 " Close current window"
 map <leader>wc :q<cr>
@@ -448,6 +450,7 @@ endfunc
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
 " Declare the list of plugins.
+Plug 'flazz/vim-colorschemes'
 Plug 'junegunn/vim-easy-align'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'preservim/nerdtree', {'on': 'NERDTreeToggle'}
@@ -600,3 +603,8 @@ let g:vimtex_view_general_viewer = 'SumatraPDF.exe'
 let g:vimtex_quickfix_mode = 0
 let g:vimtex_view_general_options = '-reuse-instance @pdf'
 let g:vimtex_view_general_options_latexmk = '-reuse-instance'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => python-syntax
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:python_highlight_all = 1
