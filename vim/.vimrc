@@ -235,6 +235,9 @@ map <leader>wo :only<cr>
 map <leader>bk :bnext<cr>
 map <leader>bj :bprevious<cr>
 
+" Search buffers using fzf"
+map <leader>bf :Buffers<cr>
+
 " Switch to the buffer previously opened in current window"
 map <leader>bp :b#<cr>
 
