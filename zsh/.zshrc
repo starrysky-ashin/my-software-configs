@@ -155,6 +155,7 @@ unset __conda_setup
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> common config >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # bindkey
 bindkey \^U backward-kill-line
+bindkey '^v' edit-command-line
 # <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< common config <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> export ans alias >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -167,4 +168,6 @@ alias tn='tmux new-session -s'
 alias ta='tmux a -t'
 alias tl='tmux ls'
 
-# <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< export and alias <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+# alias for source
+alias sz="source ~/.zshrc"
+
