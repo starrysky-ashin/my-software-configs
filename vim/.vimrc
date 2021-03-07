@@ -312,11 +312,11 @@ set laststatus=2
 map 0 ^
 
 " Remap for insert mode
-inoremap ( ()<ESC>i
-inoremap [ []<ESC>i
-inoremap { {}<ESC>i
-inoremap " ""<ESC>i
-inoremap ' ''<ESC>i
+inoremap ( ()<Left>
+inoremap [ []<Left>
+inoremap { {}<Left>
+inoremap " ""<Left>
+inoremap ' ''<Left>
 inoremap jk <ESC>
 inoremap <C-d> <Del>
 inoremap <C-k> <C-o>D
