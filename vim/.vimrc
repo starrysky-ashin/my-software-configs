@@ -33,6 +33,9 @@ filetype indent on
 set autoread
 au FocusGained,BufEnter * checktime
 
+" Set max line length"
+set colorcolumn=120
+
 " With a map leader, it's possible to do extra key combinations"
 let mapleader = ";"
 
