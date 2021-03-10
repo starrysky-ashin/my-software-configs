@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/starrysky/.oh-my-zsh"
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -127,47 +127,25 @@ if [ -x /usr/bin/dircolors ]; then
         alias fgrep='fgrep --color=auto'
         alias egrep='egrep --color=auto'
 fi
-# <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< display config <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> software config >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+# <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< software config <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+# common bindkey
+bindkey \^U backward-kill-line
+bindkey '^v' edit-command-line
+
+# common alias
+alias sz="source ~/.zshrc"
+alias smi='nvidia-smi'
+
+# export
+export PATH="$PATH"
+
 # tmux
+alias tn='tmux new-session -s'
+alias ta='tmux a -t'
+alias tl='tmux ls'
 DISABLE_AUTO_TITLE=true
 
 # autojump
 . /usr/share/autojump/autojump.sh
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/starrysky/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/starrysky/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/starrysky/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/starrysky/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-# <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< software config <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> common config >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# bindkey
-bindkey \^U backward-kill-line
-bindkey '^v' edit-command-line
-# <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< common config <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> export ans alias >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-# export
-export PATH="$PATH"
-
-# alias
-# alias for tmux
-alias tn='tmux new-session -s'
-alias ta='tmux a -t'
-alias tl='tmux ls'
-
-# alias for source
-alias sz="source ~/.zshrc"
-
