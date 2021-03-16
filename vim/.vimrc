@@ -34,7 +34,7 @@ set autoread
 au FocusGained,BufEnter * checktime
 
 " Set max line length"
-set colorcolumn=120
+" set colorcolumn=120
 
 " With a map leader, it's possible to do extra key combinations"
 let mapleader = ";"
@@ -130,6 +130,9 @@ set tm=500
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting"
 syntax enable
+
+" Set column column
+nnoremap <F2> :call ToggleCC()<CR>
 
 " Enable 256 colors palette in Gnome Terminal"
 if $COLORTERM == 'gnome-terminal'
@@ -462,6 +465,14 @@ func! CompileRunGcc()
         exec "!go build %<"
         exec "!time go run %"
     endif
+endfunc
+
+func! ToggleCC()
+  if &cc == ''
+    set cc=120
+  else
+    set cc=
+  endif
 endfunc
 
 
