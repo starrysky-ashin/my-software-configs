@@ -40,7 +40,7 @@ au FocusGained,BufEnter * checktime
 let mapleader = ";"
 
 " Remap \ to ; in normal mode
-nnoremap \ ;
+nnoremap <leader>; ;
 
 " Fast save the changes in current buffer"
 nmap <leader>ss :w!<cr>
@@ -323,6 +323,7 @@ inoremap [] []<Left>
 inoremap {} {}<Left>
 inoremap "" ""<Left>
 inoremap '' ''<Left>
+inoremap <> <><Left>
 inoremap jk <ESC>
 inoremap <C-d> <Del>
 inoremap <C-k> <C-o>D
