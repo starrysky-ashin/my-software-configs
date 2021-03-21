@@ -33,8 +33,8 @@ filetype indent on
 set autoread
 au FocusGained,BufEnter * checktime
 
-" Set max line length"
-" set colorcolumn=120
+" Set text with
+set textwidth=120
 
 " With a map leader, it's possible to do extra key combinations"
 let mapleader = ";"
@@ -71,8 +71,8 @@ set langmenu=en
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
-" Display line number.
-set nu 
+" Display relative line number.
+set rnu
 
 " Highlight current line"
 set cursorline
