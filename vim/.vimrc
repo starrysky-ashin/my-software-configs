@@ -39,8 +39,8 @@ au FocusGained,BufEnter * checktime
 " With a map leader, it's possible to do extra key combinations"
 let mapleader = ";"
 
-" Remap \ to ; in normal mode
-nnoremap <leader>; ;
+" Remap \ to ; to execute next mapping
+map <leader>; ;
 
 " Fast save the changes in current buffer"
 nmap <leader>ss :w!<cr>
