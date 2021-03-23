@@ -39,8 +39,9 @@ set textwidth=120
 " With a map leader, it's possible to do extra key combinations"
 let mapleader = ";"
 
-" Remap \ to ; to execute next mapping
-map <leader>; ;
+" Remap <leader>; to ; in normal and visual mode, for jumping to the next matched character in the line
+nnoremap <leader>; ;
+vnoremap <leader>; ;
 
 " Fast save the changes in current buffer"
 nmap <leader>ss :w!<cr>
@@ -71,8 +72,8 @@ set langmenu=en
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
-" Display relative line number.
-set rnu
+" Display hybrid (relative and abs) line number.
+set nu rnu
 
 " Highlight current line"
 set cursorline
