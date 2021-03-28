@@ -2,6 +2,7 @@
 " Maintainer: jinxin.ashin@outlook.com
 "
 " Sections:
+"   -> Usage
 "   -> General
 "   -> Vim user interface
 "   -> Colors and Fonts
@@ -18,6 +19,47 @@
 "   -> Helper functions
 "   -> Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Usage
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" It's better to automatically load and source this default vimrc file in ~/.vimrc, rather than
+" directly copy its content into ~/.vimrc. This is because that we may frequently update
+" this vimrc file by git, but we do not want to frequently synchronize the changes in our ~/.vimrc file.
+"
+" This vimrc file covers the general settings about all aspects of Vim, including Vim plugins.
+" And, upon this file, the ~/.vimrc file only needs to include some env-specific settings,
+" such as the path of tag file and Python interpreter, and conda related setting.
+
+" With the following three steps, you can quickly write a ~/.vimrc file that exploits the config info of this file.
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Step 1: Set default file path
+" let $default_vimrc = "/path/to/this/file"
+" let $default_ycm_global_ycm_extra_conf = "/path/to/.global_extra_conf.py/in/this/repo"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Step 2: Source the default vimrc file
+" source $default_vimrc
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Step 3: Env-specific settings
+" " ctags
+" let $python_lib_dir = expand("/path/to/python/lib/dir") # e.g., "~/anaconda3/lib/python3.7"
+" let $python_tagfile = expand("~/.cache/tags/py37.tags") # e.g., "~/.cache/tags/py37.tags"
+" nnoremap <leader>gt :AsyncRun! ctags -f $python_tagfile -R $python_lib_dir
+" set tags+=$python_tagfile
+
+" " YCM
+" let g:ycm_python_interpreter_path = "/path/to/local/python/interpreter"
+" let g:ycm_python_sys_path = ["/path/to/python/lib/site-packages/"]
+" let g:ycm_extra_conf_vim_data = [
+"             \ "g:ycm_python_interpreter_path",
+"             \ "g:ycm_python_sys_path"
+"             \]
+" let g:ycm_global_ycm_extra_conf = $default_ycm_global_ycm_extra_conf
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -376,13 +418,13 @@ hi SpellBad gui=undercurl
 noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Quickly open a buffer for scribble"
-map <leader>qb :tabnew ~/.buffer/buffer<cr>
+map <leader>qb :call EnsureDirExists($HOME . "/.buffer")<cr>:tabnew ~/.buffer/buffer<cr>
 
 " Quickly open a python buffer for scribble"
-map <leader>qb :tabnew ~/.buffer/buffer.py<cr>
+map <leader>qp ::call EnsureDirExists($HOME . "/.buffer")<cr>:tabnew ~/.buffer/buffer.py<cr>
 
 " Quickly open a markdown buffer for scribble"
-map <leader>qm :tabnew ~/.buffer/buffer.md<cr>
+map <leader>qm ::call EnsureDirExists($HOME . "/.buffer")<cr>:tabnew ~/.buffer/buffer.md<cr>
 
 " Toggle paste mode on and off"
 map <leader>pp :setlocal paste!<cr>
@@ -399,6 +441,18 @@ nnoremap <F5> :call CompileRunGcc()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Ensure dir
+function! EnsureDirExists(dir)
+  if !isdirectory(a:dir)
+    if exists("*mkdir")
+      call mkdir(a:dir,'p')
+      echo"Created directory:" . a:dir
+    else
+      echo"Please create directory:" . a:dir
+    endif
+  endif
+endfunction
+
 " Return true if paste mode is enabled"
 function! HasPaste()
     if &paste
@@ -486,30 +540,38 @@ endfunc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
-" Declare the list of plugins.
+" Super plugins related to workflow
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'ycm-core/YouCompleteMe', {'commit':'d98f896', 'on': []}
+Plug 'SirVer/ultisnips'
+Plug 'starryskyx/vim-snippets'
+Plug 'skywind3000/asyncrun.vim'
+" Interface
 Plug 'flazz/vim-colorschemes'
-Plug 'junegunn/vim-easy-align'
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'mhinz/vim-startify'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree', {'on': 'NERDTreeToggle'}
+" Tag related
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
+Plug 'godlygeek/tabular'
+" Fast editing
+Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'mhinz/vim-startify'
-Plug 'ycm-core/YouCompleteMe', {'commit':'d98f896', 'on': []}
-Plug 'honza/vim-snippets'
-Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'lervag/vimtex'
-Plug 'godlygeek/tabular'
+" Git
+Plug 'airblade/vim-gitgutter'
+" Python
+Plug 'vim-python/python-syntax'
+" Markdown
 Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.vim'
-" List ends here. Plugins become visible to Vim after this call.
+" Latex
+Plug 'lervag/vimtex'
 call plug#end()
 
 
@@ -539,19 +601,19 @@ nmap ga <Plug>(EasyAlign)
 " => tags config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set tags=./.tags;,.tags
-set tags+=~/anaconda3/lib/python3.7/.tags
-" gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
+" gutentags plugin searches for the tag file by recursively traversing the folders in the project root. 
+" The project root dir is determined by the following sub dir names.
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
-" 所生成的数据文件的名称
+" tag file name
 let g:gutentags_ctags_tagfile = '.tags'
-" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+" dir of generated tag files. Don't put tag files under the project root dir.
 let s:vim_tags = expand('~/.cache/tags')
 let g:gutentags_cache_dir = s:vim_tags
-" 配置 ctags 的参数
+" extra args for ctags
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-" 检测 ~/.cache/tags 不存在就新建
+" ensure the dir for tags
 if !isdirectory(s:vim_tags)
    silent! call mkdir(s:vim_tags, 'p')
 endif
@@ -568,18 +630,11 @@ let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_complete_in_strings=1
 let g:ycm_key_invoke_completion = '<c-z>'
 set completeopt=menu,menuone
-noremap <c-z> <NOP>
 let g:ycm_semantic_triggers =  {
            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
            \ 'cs,lua,javascript': ['re!\w{2}'],
            \ }
-let g:ycm_python_interpreter_path = "/home/starrysky/anaconda3/bin/python3"
-let g:ycm_python_sys_path = ["/home/starrysky/anaconda3/lib/python3.7/site-packages/"]
-let g:ycm_extra_conf_vim_data = [
-            \ "g:ycm_python_interpreter_path",
-            \ "g:ycm_python_sys_path"
-            \]
-let g:ycm_global_ycm_extra_conf = "~/.global_extra_conf.py"
+
 augroup load_ycm
     autocmd!
     autocmd InsertEnter * call plug#load('YouCompleteMe') | autocmd! load_ycm
@@ -595,11 +650,7 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 " => snippets config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plz don't set the following directories with absolute paths
-let g:UltiSnipsSnippetDirectories=[
-            \ "UltiSnips",
-            \ "mysnippets"
-            \]
-let g:my_python_snip_file = "~/.vim/plugged/vim-snippets/mysnippets/python.snippets"
+let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
 " Key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
@@ -648,3 +699,7 @@ let g:vimtex_view_general_options_latexmk = '-reuse-instance'
 " => python-syntax
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:python_highlight_all = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => asyncrun
+" nnoremap <leader>gt :AsyncRun! ctags -f $python_tagfile -R $python_lib_dir
