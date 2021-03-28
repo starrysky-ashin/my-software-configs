@@ -102,7 +102,12 @@ nnoremap <leader>sv :w<CR>:source $MYVIMRC<CR>
 map <leader>ls :ls<cr>
 
 " Show absolute path of current buffer
-map <leader>ab :echo expand("%:p:h")<cr>
+map <leader>ab :echo expand("%:p")<cr>
+
+" Disable preview window for complete
+set completeopt=menu,menuone
+set completeopt-=preview
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -556,7 +561,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree', {'on': 'NERDTreeToggle'}
 Plug 'skywind3000/vim-quickui'
-" Tag related
+" Tag
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'godlygeek/tabular'
@@ -604,6 +609,9 @@ nmap ga <Plug>(EasyAlign)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => tags config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => gutentags
 set tags=./.tags;,.tags
 " gutentags plugin searches for the tag file by recursively traversing the folders in the project root. 
 " The project root dir is determined by the following sub dir names.
@@ -627,8 +635,8 @@ let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-preview
-" noremap <C-]> :PreviewTag<cr>
-" noremap <C-[> :PreviewClose<cr>
+noremap <F3> :PreviewTag<cr>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => YouCompleteMe config
@@ -640,7 +648,6 @@ let g:ycm_min_num_identifier_candidate_chars = 2
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_complete_in_strings=1
 let g:ycm_key_invoke_completion = '<c-z>'
-set completeopt=menu,menuone
 let g:ycm_semantic_triggers =  {
            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
            \ 'cs,lua,javascript': ['re!\w{2}'],
