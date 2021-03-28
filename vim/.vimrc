@@ -101,6 +101,8 @@ nnoremap <leader>sv :w<CR>:source $MYVIMRC<CR>
 " List all buffers"
 map <leader>ls :ls<cr>
 
+" Show absolute path of current buffer
+map <leader>ab :echo expand("%:p:h")<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
