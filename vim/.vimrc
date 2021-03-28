@@ -555,10 +555,12 @@ Plug 'mhinz/vim-startify'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree', {'on': 'NERDTreeToggle'}
+Plug 'skywind3000/vim-quickui'
 " Tag related
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'godlygeek/tabular'
+Plug 'skywind3000/vim-preview'
 " Fast editing
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-surround'
@@ -608,18 +610,25 @@ set tags=./.tags;,.tags
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
 " tag file name
 let g:gutentags_ctags_tagfile = '.tags'
+
 " dir of generated tag files. Don't put tag files under the project root dir.
 let s:vim_tags = expand('~/.cache/tags')
 let g:gutentags_cache_dir = s:vim_tags
-" extra args for ctags
-let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 " ensure the dir for tags
 if !isdirectory(s:vim_tags)
    silent! call mkdir(s:vim_tags, 'p')
 endif
 
+" extra args for ctags
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-preview
+" noremap <C-]> :PreviewTag<cr>
+" noremap <C-[> :PreviewClose<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => YouCompleteMe config
