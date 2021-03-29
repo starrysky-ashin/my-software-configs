@@ -560,12 +560,10 @@ Plug 'mhinz/vim-startify'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree', {'on': 'NERDTreeToggle'}
-Plug 'skywind3000/vim-quickui'
 " Tag
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar'
 Plug 'godlygeek/tabular'
-Plug 'skywind3000/vim-preview'
 " Fast editing
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-surround'
@@ -631,11 +629,6 @@ endif
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => vim-preview
-noremap <F3> :PreviewTag<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
