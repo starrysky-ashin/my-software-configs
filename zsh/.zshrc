@@ -35,6 +35,7 @@ bindkey '^v' edit-command-line
 # Env alias
 alias sz="source ~/.zshrc"
 alias smi='nvidia-smi'
+alias ctags="ctags -f .tags -R *"
 
 
 #**********************************************************#
