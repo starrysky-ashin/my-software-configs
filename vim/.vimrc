@@ -46,9 +46,9 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Step 3: Env-specific settings
 " " ctags
-" let $python_lib_dir = expand("/path/to/python/lib/dir") # e.g., "~/anaconda3/lib/python3.7"
-" let $python_tagfile = expand("~/.cache/tags/py37.tags") # e.g., "~/.cache/tags/py37.tags"
-" nnoremap <leader>gt :AsyncRun! ctags -f $python_tagfile -R $python_lib_dir
+" let $python_lib_dir = expand("/path/to/python/lib/dir") # e.g., "~/anaconda3/envs/flow/lib/python3.7/site-packages/torch"
+" let $python_tagfile = expand("~/.cache/tags/py37.tags") # e.g., "~/.cache/tags/python-env-flow-torch.tags"
+" nnoremap <leader>cp :AsyncRun! ctags -f $python_tagfile -R $python_lib_dir<cr>
 " set tags+=$python_tagfile
 
 " " YCM
@@ -103,6 +103,7 @@ map <leader>ls :ls<cr>
 
 " Show absolute path of current buffer
 map <leader>ab :echo expand("%:p")<cr>
+map <leader>ia :call InsertPath()<cr>
 
 " Disable preview window for complete
 set completeopt=menu,menuone
@@ -294,9 +295,6 @@ map <leader>wo :only<cr>
 map <leader>bk :bnext<cr>
 map <leader>bj :bprevious<cr>
 
-" Search buffers using fzf"
-map <leader>bf :Buffers<cr>
-
 " Switch to the buffer previously opened in current window"
 map <leader>bp :b#<cr>
 
@@ -333,12 +331,12 @@ let g:lasttab = 1
 nmap <leader>tp :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
-" Open a new tab with current buffer's path
-" Super useful when editing files in the same directory
-map <leader>te :tabedit <C-r>=expand("%:p:h")<cr>/
+" " Open a new tab with current buffer's path
+" " Super useful when editing files in the same directory
+" map <leader>te :tabedit <C-r>=expand("%:p:h")<cr>/
 
-" Switch CWD to the directory of the open buffer"
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
+" " Switch CWD to the directory of the open buffer"
+" map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers"
 try
@@ -448,6 +446,11 @@ nnoremap <F5> :call CompileRunGcc()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! InsertPath()
+    let $file_path = expand("%:p")
+    execute "r! echo $file_path"
+endfunction
+
 " Ensure dir
 function! EnsureDirExists(dir)
   if !isdirectory(a:dir)
@@ -562,14 +565,13 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree', {'on': 'NERDTreeToggle'}
 " Tag
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'majutsushi/tagbar'
-Plug 'godlygeek/tabular'
 " Fast editing
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'ervandew/supertab'
+Plug 'godlygeek/tabular'
 " Git
 Plug 'airblade/vim-gitgutter'
 " Python
@@ -690,13 +692,6 @@ let g:airline_theme='powerlineish'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => tagbar config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" tagbar
-nnoremap <leader>aa :TagbarToggle<CR><C-w>=
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-tex config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-tex
@@ -706,11 +701,22 @@ let g:vimtex_quickfix_mode = 0
 let g:vimtex_view_general_options = '-reuse-instance @pdf'
 let g:vimtex_view_general_options_latexmk = '-reuse-instance'
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => python-syntax
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:python_highlight_all = 1
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => asyncrun
-" nnoremap <leader>gt :AsyncRun! ctags -f $python_tagfile -R $python_lib_dir
+" nnoremap <leader>cp :AsyncRun! ctags -f $python_tagfile -R $python_lib_dir
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => fzf.vim
+map <leader>bf :Buffers<cr>
+map <leader>tg :Tags<cr>
+map <leader>bg :BTags<cr>
+map <leader>gf :GFiles<cr>
+map <leader>co :Commits<cr>
