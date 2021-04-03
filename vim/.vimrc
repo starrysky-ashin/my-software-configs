@@ -46,10 +46,12 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Step 3: Env-specific settings
 " " ctags
-" let $python_lib_dir = expand("/path/to/python/lib/dir") # e.g., "~/anaconda3/envs/flow/lib/python3.7/site-packages/torch"
-" let $python_tagfile = expand("~/.cache/tags/py37.tags") # e.g., "~/.cache/tags/python-env-flow-torch.tags"
+" let $python_lib_dir = expand("~/anaconda3/lib/python3.7/site-packages")
+" let $python_tagfile = expand("~/.cache/tags/py37-site-packages.tags")
 " nnoremap <leader>cp :AsyncRun! ctags -f $python_tagfile -R $python_lib_dir<cr>
-" set tags+=$python_tagfile
+" " Pay attention to add extra tags into current project, because it may cause a mess when using fzf to search tags.
+" let $ext_tagfile = $python_tagfile
+" nnoremap <F3> :call ToggleExtTags($ext_tagfile)<CR>
 
 " " YCM
 " let g:ycm_python_interpreter_path = "/path/to/local/python/interpreter"
@@ -544,6 +546,15 @@ func! ToggleCC()
   endif
 endfunc
 
+function! ToggleExtTags(ext_tagfile)
+    let $ext_tagfile = a:ext_tagfile
+    if stridx(&tags, $ext_tagfile) == -1
+        set tags+=$ext_tagfile
+    else
+        set tags-=$ext_tagfile
+    endif
+    echo "tags: " . &tags
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
