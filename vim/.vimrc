@@ -187,9 +187,6 @@ set tm=500
 " Enable syntax highlighting"
 syntax enable
 
-" Set column column
-nnoremap <F2> :call ToggleCC()<CR>
-
 " Enable 256 colors palette in Gnome Terminal"
 if $COLORTERM == 'gnome-terminal'
     set t_Co=256
@@ -735,4 +732,4 @@ map <leader>co :Commits<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => tagbar
-nmap <F8> :TagbarToggle<CR>
+nmap <F2> :TagbarToggle<CR>
