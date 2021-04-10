@@ -732,3 +732,7 @@ map <leader>tg :Tags<cr>
 map <leader>bg :BTags<cr>
 map <leader>gf :GFiles<cr>
 map <leader>co :Commits<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => tagbar
+nmap <F8> :TagbarToggle<CR>
