@@ -576,6 +576,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree', {'on': 'NERDTreeToggle'}
 " Tag
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'preservim/tagbar'
 " Fast editing
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-surround'
