@@ -379,6 +379,7 @@ inoremap <C-b> <Left>
 
 " Remap for normal mode"
 nnoremap <C-j> o<ESC>
+nnoremap <C-e> //e<CR>
 
 " Remap for visual mode"
 vnoremap <C-e> <ESC>
