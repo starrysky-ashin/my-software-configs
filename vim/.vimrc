@@ -733,4 +733,4 @@ map <leader>co :Commits<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => tagbar
-nmap <F2> :TagbarToggle<CR>
+nmap <F2> :TagbarToggle<CR><C-w>=
