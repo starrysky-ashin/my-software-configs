@@ -77,9 +77,6 @@ filetype indent on
 set autoread
 au FocusGained,BufEnter * checktime
 
-" Set text with
-set textwidth=120
-
 " With a map leader, it's possible to do extra key combinations"
 let mapleader = ";"
 
