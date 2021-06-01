@@ -265,8 +265,10 @@ cnoremap <c-k> <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Operations related to windows, buffers, and tabs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Map <space> to / (search) and <C-space> to ? (backwards search)"
+" Map <space> to / (search)"
 map <space> /
+
+" Let the cursor stay in current searching word
 nnoremap * *N
 
 " Disable highlight when <leader><cr> is pressed"
