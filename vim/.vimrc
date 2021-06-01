@@ -247,8 +247,8 @@ set wrap "Wrap lines"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual model pressing * or # searches for the current selection"
 " Super useful!
-vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>N
+" vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -267,7 +267,7 @@ cnoremap <c-k> <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map <space> to / (search) and <C-space> to ? (backwards search)"
 map <space> /
-map <C-g> ?
+nnoremap * *N
 
 " Disable highlight when <leader><cr> is pressed"
 map <silent> <leader><cr> :noh<cr>
