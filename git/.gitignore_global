@@ -1,0 +1,14 @@
+# Usage: set core.excludesFile to the path of this file.
+
+
+# ignore files for Python
+*.pyc
+*.py~
+*.py#
+
+# ignore the tag file
+tags
+.tags
+
+# ignore the test, temporary, or frequently changed files for my personal usage.
+my_*
