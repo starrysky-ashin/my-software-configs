@@ -379,9 +379,11 @@ inoremap <C-b> <Left>
 " Remap for normal mode"
 nnoremap <C-j> o<ESC>
 nnoremap <C-e> //e<CR>
+nnoremap <C-g> ggVG<CR>
 
 " Remap for visual mode"
 vnoremap <C-e> <ESC>
+vnoremap <C-g> ggVG<CR>
 
 " Delete trailing white space on save, useful for some filetypes"
 fun! CleanExtraSpaces()
