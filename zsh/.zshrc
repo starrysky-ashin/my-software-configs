@@ -12,18 +12,9 @@
 
 
 #**********************************************************#
-# => Usage
-# Copy the following cmd (source this rc file) to ~/.zshrc
-
-# export default_zshrc=/path/to/this/file
-# [ -f $default_zshrc ] && source $default_zshrc
-
-
-#**********************************************************#
 # => General
 # ZSH path related
 export ZSH=$HOME/.oh-my-zsh
-[ -f $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
 
 # Disable auto title
 DISABLE_AUTO_TITLE=true
@@ -84,9 +75,3 @@ fi
 alias tn='tmux new-session -s'
 alias ta='tmux a -t'
 alias tl='tmux ls'
-
-# autojump
-[ -f /usr/share/autojump/autojump.sh ] && . /usr/share/autojump/autojump.sh
-
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

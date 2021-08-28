@@ -22,48 +22,6 @@
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Usage
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" It's better to automatically load and source this default vimrc file in ~/.vimrc, rather than
-" directly copy its content into ~/.vimrc. This is because that we may frequently update
-" this vimrc file by git, but we do not want to frequently synchronize the changes in our ~/.vimrc file.
-"
-" This vimrc file covers the general settings about all aspects of Vim, including Vim plugins.
-" And, upon this file, the ~/.vimrc file only needs to include some env-specific settings,
-" such as the path of tag file and Python interpreter, and conda related setting.
-
-" With the following three steps, you can quickly write a ~/.vimrc file that exploits the config info of this file.
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Step 1: Set default file path
-" let $default_vimrc = "/path/to/this/file"
-" let $default_ycm_global_ycm_extra_conf = "/path/to/.global_extra_conf.py/in/this/repo"
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Step 2: Source the default vimrc file
-" source $default_vimrc
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Step 3: Env-specific settings
-" " ctags
-" let $python_lib_dir = expand("~/anaconda3/lib/python3.7/site-packages")
-" let $python_tagfile = expand("~/.cache/tags/py37-site-packages.tags")
-" nnoremap <leader>cp :AsyncRun! ctags -f $python_tagfile -R $python_lib_dir<cr>
-" " Pay attention to add extra tags into current project, because it may cause a mess when using fzf to search tags.
-" let $ext_tagfile = $python_tagfile
-" nnoremap <F3> :call ToggleExtTags($ext_tagfile)<CR>
-
-" " YCM
-" let g:ycm_python_interpreter_path = "/path/to/local/python/interpreter"
-" let g:ycm_python_sys_path = ["/path/to/python/lib/site-packages/"]
-" let g:ycm_extra_conf_vim_data = [
-"             \ "g:ycm_python_interpreter_path",
-"             \ "g:ycm_python_sys_path"
-"             \]
-" let g:ycm_global_ycm_extra_conf = $default_ycm_global_ycm_extra_conf
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set how many lines of history Vim has to remember"
@@ -444,6 +402,7 @@ set clipboard=unnamed
 " Fast runing"
 nnoremap <F5> :call CompileRunGcc()<CR>
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -555,6 +514,7 @@ function! ToggleExtTags(ext_tagfile)
     echo "tags: " . &tags
 endfunction
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -563,7 +523,7 @@ call plug#begin('~/.vim/plugged')
 " Super plugins related to workflow
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'ycm-core/YouCompleteMe', {'commit':'d98f896', 'on': []}
+Plug 'ycm-core/YouCompleteMe', {'on': []}
 Plug 'SirVer/ultisnips'
 Plug 'starryskyx/vim-snippets'
 Plug 'skywind3000/asyncrun.vim'
@@ -595,31 +555,22 @@ Plug 'lervag/vimtex'
 call plug#end()
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => NERDTree config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <leader>nn :NERDTree<CR><C-w>=
-nnoremap <leader>nt :NERDTreeToggle<CR><C-w>=
-nnoremap <leader>nf :NERDTreeFocus<CR><C-w>=
-nnoremap <leader>ng :NERDTreeFind<CR><C-w>=
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => nerdtree
+nnoremap <leader>nn :NERDTreeToggle<CR><C-w>=
+nnoremap <leader>nf :NERDTreeFind<CR><C-w>=
 let g:NERDTreeWinPos = "right"
+let g:NERDTreeWinSize= 50
 let NERDTreeShowHidden=1
 " autocmd vimenter * NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => EasyAlign config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => easyalign
 " Start interactive EasyAlign in visual mode (e.g. gaip)
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => tags config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => gutentags
@@ -643,10 +594,8 @@ let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => YouCompleteMe config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => ycm
 let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_server_log_level = 'info'
@@ -667,12 +616,14 @@ augroup END
 " Make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:ycm_extra_conf_vim_data = [
+            \ "g:ycm_python_interpreter_path",
+            \ "g:ycm_python_sys_path"
+            \]
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => snippets config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => snippets
 " Plz don't set the following directories with absolute paths
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
@@ -683,10 +634,8 @@ let g:UltiSnipsJumpForwardTrgger = "<c-j>"
 let g:UltiSnipsJumpBackwardTrigger = "<c-k>"
 let g:ultisnips_python_style="google"
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => gitgutter config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => gitgutter
 " Use fontawesome icons as signs
 let g:gitgutter_sign_added = '+'
 let g:gitgutter_sign_modified = '>'
@@ -694,35 +643,21 @@ let g:gitgutter_sign_removed = '-'
 let g:gitgutter_sign_removed_first_line = '^'
 let g:gitgutter_sign_modified_removed = '<'
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => airline config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" airline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => airline
 let g:airline_theme='powerlineish'
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => vim-tex config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-tex
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-tex
 let g:tex_flavor = 'latex'
 let g:vimtex_view_general_viewer = 'SumatraPDF.exe'
 let g:vimtex_quickfix_mode = 0
 let g:vimtex_view_general_options = '-reuse-instance @pdf'
 let g:vimtex_view_general_options_latexmk = '-reuse-instance'
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => python-syntax
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:python_highlight_all = 1
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => asyncrun
-" nnoremap <leader>cp :AsyncRun! ctags -f $python_tagfile -R $python_lib_dir
-
+" => python-syntax
+let g:python_highlight_all = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => fzf.vim
