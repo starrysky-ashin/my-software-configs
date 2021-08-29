@@ -3,12 +3,16 @@ import os
 import os.path as osp
 from glob import glob
 
-
+# path
 HOME = osp.expanduser("~")
 root = osp.split(osp.split(osp.abspath(__file__))[0])[0]
 python_interp_path = osp.join(HOME, "anaconda3/bin/python")
 python_lib_dir = glob(osp.join(HOME, "anaconda3/lib/python*/site-packages"))[-1]
 python_tag_file = osp.join(HOME, ".cache/tags/py-site-packages.tags")
+
+# user
+my_email = "x.jin@nuaa.edu.cn"
+my_name = "jinxin"
 
 
 def process_git():
@@ -18,10 +22,11 @@ def process_git():
     entry_config_file = osp.join(HOME, ".gitconfig")
     if osp.exists(entry_config_file):
         os.rename(entry_config_file, osp.join(HOME, ".gitconfig.bak"))
+        print("We backup ~/.gitconfig to ~/.gitconfig.bak!")
     with open(entry_config_file, "w") as f:
         user_str = "[user]\n    "
-        user_str += "email = x.jin@nuaa.edu.cn\n    "
-        user_str += "name = jinxin\n"
+        user_str += "email = %s\n    " % my_email
+        user_str += "name = %s\n" % my_name
         user_str += "\n"
         f.write(user_str)
 
@@ -42,6 +47,8 @@ def process_git():
 
         f.close()
 
+    print("Finish writing config info to ~/.gitconfig!\n")
+
 
 def process_tmux():
     tmux_config_file = osp.join(root, "tmux", ".tmux.conf")
@@ -49,11 +56,14 @@ def process_tmux():
 
     if osp.exists(entry_tmux_config_file):
         os.rename(entry_tmux_config_file, osp.join(HOME, ".tmux.conf.bak"))
+        print("We backup ~/.tmux.conf to ~/.tmux.conf.bak!")
     with open(entry_tmux_config_file, "w") as f:
         write_str = "source-file %s" % tmux_config_file
         write_str += "\n"
         f.write(write_str)
         f.close()
+
+    print("Finish writing config info to ~/.tmux.conf!\n")
 
 
 def process_vim():
@@ -63,6 +73,7 @@ def process_vim():
 
     if osp.exists(entry_vim_rc_file):
         os.rename(entry_vim_rc_file, osp.join(HOME, ".vimrc.bak"))
+        print("We backup ~/.vimrc to ~/vimrc.bak!")
     with open(entry_vim_rc_file, "w") as f:
         source_str = "\" source default .vimrc\n"
         source_str += "let $default_vimrc = \"%s\"\n" % vim_rc_file
@@ -89,6 +100,8 @@ def process_vim():
 
         f.close()
 
+    print("Finish writing config info to ~/.vimrc!\n")
+
 
 def process_zsh():
     zsh_rc_file = osp.join(root, "zsh", ".zshrc")
@@ -96,6 +109,7 @@ def process_zsh():
 
     if osp.exists(entry_zsh_rc_file):
         shutil.copyfile(entry_zsh_rc_file, osp.join(HOME, ".zshrc.bak"))
+        print("We backup ~/.zshrc to ~/.zshrc.bak!")
     with open(entry_zsh_rc_file, "r+") as f:
         old = f.read()
         f.seek(0)
@@ -123,6 +137,13 @@ def process_zsh():
 
         f.write(old)
         f.close()
+
+    print("Finish writing config into to ~/.zshrc!\n")
+    print("There may be some repeated codes in ~/.zshrc, " + \
+            "since we keep the orignal content.")
+    print("Basically, this will not affect usage effect. " + \
+            "But, anyway, you can check ~/.zshrc, " + \
+            "and remove the repeated codes.")
 
 
 if __name__ == "__main__":
