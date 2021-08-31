@@ -13,7 +13,6 @@
 "   -> Operations related to windows, buffers and tabs
 "   -> Status line
 "   -> Editing mappings
-"   -> Vimgrep searching and cope displaying
 "   -> Spell checking
 "   -> Misc
 "   -> Helper functions
@@ -60,7 +59,6 @@ map <leader>ls :ls<cr>
 
 " Show absolute path of current buffer
 map <leader>ab :echo expand("%:p")<cr>
-map <leader>ia :call InsertPath()<cr>
 
 " Disable preview window for complete
 set completeopt=menu,menuone
@@ -87,6 +85,9 @@ set cursorline
 
 " Turn on the wild menu"
 set wildmenu
+
+" Always show the status line
+set laststatus=2
 
 " Ignore complied files"
 set wildignore=*.o,*~,*pyc
@@ -200,7 +201,7 @@ set si "Smart indent"
 set wrap "Wrap lines"
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Visual mode related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual model pressing * or # searches for the current selection"
@@ -308,11 +309,6 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Status line
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Always show the status line
-set laststatus=2
-
-" Format the status line"
-" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -406,11 +402,6 @@ nnoremap <F5> :call CompileRunGcc()<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! InsertPath()
-    let $file_path = expand("%:p")
-    execute "r! echo $file_path"
-endfunction
-
 " Ensure dir
 function! EnsureDirExists(dir)
   if !isdirectory(a:dir)
