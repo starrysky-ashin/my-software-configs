@@ -59,6 +59,7 @@ map <leader>ls :ls<cr>
 
 " Show absolute path of current buffer
 map <leader>ab :echo expand("%:p")<cr>
+map <leader>cp :<C-u>call CopyPath()<cr>
 
 " Disable preview window for complete
 set completeopt=menu,menuone
@@ -421,6 +422,11 @@ function! HasPaste()
         return 'PASTE MODE'
     endif
     return ''
+endfunction
+
+function! CopyPath()
+    let path = expand("%:p")
+    call setreg("p", path)
 endfunction
 
 " Don't close window, when deleting a buffer"
