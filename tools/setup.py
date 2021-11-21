@@ -8,7 +8,7 @@ HOME = osp.expanduser("~")
 root = osp.split(osp.split(osp.abspath(__file__))[0])[0]
 python_interp_path = osp.join(HOME, "anaconda3/bin/python")
 python_lib_dir = glob(osp.join(HOME, "anaconda3/lib/python*/site-packages"))[-1]
-python_tag_file = osp.join(HOME, ".cache/tags/py-site-packages.tags")
+# python_tag_file = osp.join(HOME, ".cache/tags/py-site-packages.tags")
 
 # user
 my_email = "x.jin@nuaa.edu.cn"
@@ -81,15 +81,15 @@ def process_vim():
         source_str += "\n"
         f.write(source_str)
 
-        ctags_str = "\" ctags path config\n"
-        ctags_str += "let $python_lib_dir = \"%s\"\n" % python_lib_dir
-        ctags_str += "let $python_tag_file = \"%s\"\n" % python_tag_file
-        ctags_str += "let $ext_tag_file = $python_tag_file\n"
-        ctags_str += r"nnoremap <F9> :AsyncRun! ctags -f $python_tag_file -R $python_lib_dir<cr>"
-        ctags_str += "\n"
-        ctags_str += r"nnoremap <F10> :call ToggleExtTags($ext_tag_file)<CR>"
-        ctags_str += "\n\n"
-        f.write(ctags_str)
+        # ctags_str = "\" ctags path config\n"
+        # ctags_str += "let $python_lib_dir = \"%s\"\n" % python_lib_dir
+        # ctags_str += "let $python_tag_file = \"%s\"\n" % python_tag_file
+        # ctags_str += "let $ext_tag_file = $python_tag_file\n"
+        # ctags_str += r"nnoremap <F9> :AsyncRun! ctags -f $python_tag_file -R $python_lib_dir<cr>"
+        # ctags_str += "\n"
+        # ctags_str += r"nnoremap <F10> :call ToggleExtTags($ext_tag_file)<CR>"
+        # ctags_str += "\n\n"
+        # f.write(ctags_str)
 
         ycm_str = "\" ycm path config\n"
         ycm_str += "let g:ycm_python_interpreter_path = \"%s\"\n" % python_interp_path
