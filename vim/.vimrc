@@ -524,7 +524,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'ycm-core/YouCompleteMe', {'on': []}
 Plug 'SirVer/ultisnips'
-Plug 'starryskyx/vim-snippets'
+Plug 'starrysky-ashin/vim-snippets'
 Plug 'skywind3000/asyncrun.vim'
 " Interface
 Plug 'flazz/vim-colorschemes'
