@@ -398,7 +398,7 @@ setglobal complete-=i
 " Use system clipboard
 set clipboard=unnamed
 
-" Fast runing"
+" Fast running"
 nnoremap <F5> :call CompileRunGcc()<CR>
 
 
@@ -471,7 +471,7 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 
-" Fast runing
+" Fast running
 func! CompileRunGcc()
     exec "w"
     if &filetype == "c"
@@ -522,7 +522,7 @@ call plug#begin('~/.vim/plugged')
 " Super plugins related to workflow
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'ycm-core/YouCompleteMe', {'on': []}
+Plug 'ycm-core/YouCompleteMe', {'on': [], 'commit':'d98f896'}
 Plug 'SirVer/ultisnips'
 Plug 'starrysky-ashin/vim-snippets'
 Plug 'skywind3000/asyncrun.vim'
@@ -551,6 +551,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.vim'
 " Latex
 Plug 'lervag/vimtex'
+Plug 'xuhdev/vim-latex-live-preview'
 call plug#end()
 
 
@@ -649,10 +650,17 @@ let g:airline_theme='powerlineish'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-tex
 let g:tex_flavor = 'latex'
-let g:vimtex_view_general_viewer = 'SumatraPDF.exe'
+let g:vimtex_view_general_viewer = 'okular'
 let g:vimtex_quickfix_mode = 0
 let g:vimtex_view_general_options = '-reuse-instance @pdf'
 let g:vimtex_view_general_options_latexmk = '-reuse-instance'
+
+" => vim-latex-live-preview
+let g:livepreview_previewer = 'okular'
+" let g:livepreview_engine = 'latexmk' . '-xelatex'
+let g:livepreview_engine = 'latexmk'
+let g:livepreview_use_biber = 1
+map <F9> :LLPStartPreview<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => python-syntax
