@@ -657,8 +657,7 @@ let g:vimtex_view_general_options_latexmk = '-reuse-instance'
 
 " => vim-latex-live-preview
 let g:livepreview_previewer = 'okular'
-" let g:livepreview_engine = 'latexmk' . '-xelatex'
-let g:livepreview_engine = 'latexmk'
+let g:livepreview_engine = 'xelatex'
 let g:livepreview_use_biber = 1
 map <F9> :LLPStartPreview<CR>
 
