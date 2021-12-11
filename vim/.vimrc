@@ -360,13 +360,7 @@ endif
 " => Spell checking
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Pressing <leader>sp will toggle and untoggle spell checking"
-map <leader>sp :setlocal spell!<cr>
-
-" Shortcuts for spell checking using <leader>"
-map <leader>sl ]s
-map <leader>sh [s
-map <leader>sa zg
-map <leader>s? z=
+map <F10> :setlocal spell!<cr>
 
 hi clear SpellBad
 hi SpellBad cterm=underline
@@ -390,7 +384,9 @@ map <leader>qp ::call EnsureDirExists($HOME . "/.buffer")<cr>:tabnew ~/.buffer/b
 map <leader>qm ::call EnsureDirExists($HOME . "/.buffer")<cr>:tabnew ~/.buffer/buffer.md<cr>
 
 " Toggle paste mode on and off"
-map <leader>pp :setlocal paste!<cr>
+nnoremap <F9> :set invpaste paste?<CR>
+set pastetoggle=<F9>
+set showmode
 
 " Default complete
 setglobal complete-=i
@@ -659,7 +655,7 @@ let g:vimtex_view_general_options_latexmk = '-reuse-instance'
 let g:livepreview_previewer = 'okular'
 let g:livepreview_engine = 'xelatex'
 let g:livepreview_use_biber = 1
-map <F9> :LLPStartPreview<CR>
+map <F6> :LLPStartPreview<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => python-syntax
