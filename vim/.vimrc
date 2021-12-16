@@ -59,7 +59,13 @@ map <leader>ls :ls<cr>
 
 " Show absolute path of current buffer
 map <leader>ab :echo expand("%:p")<cr>
+
+" Copy the absolute path of current buffer
 map <leader>cp :<C-u>call CopyPath()<cr>
+
+" Copy the content of current file and prepare to edit in anthor file
+map <leader>cg ggVGy:<C-u>call CopyPath()<cr>:tabnew<cr>:tabmove -1<cr>:e <C-r><C-o>p
+
 
 " Disable preview window for complete
 set completeopt=menu,menuone
@@ -378,10 +384,10 @@ noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 map <leader>qb :call EnsureDirExists($HOME . "/.buffer")<cr>:tabnew ~/.buffer/buffer<cr>
 
 " Quickly open a python buffer for scribble"
-map <leader>qp ::call EnsureDirExists($HOME . "/.buffer")<cr>:tabnew ~/.buffer/buffer.py<cr>
+map <leader>qp :call EnsureDirExists($HOME . "/.buffer")<cr>:tabnew ~/.buffer/buffer.py<cr>
 
 " Quickly open a markdown buffer for scribble"
-map <leader>qm ::call EnsureDirExists($HOME . "/.buffer")<cr>:tabnew ~/.buffer/buffer.md<cr>
+map <leader>qm :call EnsureDirExists($HOME . "/.buffer")<cr>:tabnew ~/.buffer/buffer.md<cr>
 
 " Toggle paste mode on and off"
 nnoremap <F9> :set invpaste paste?<CR>
