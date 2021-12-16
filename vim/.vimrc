@@ -559,7 +559,7 @@ call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => nerdtree
-nnoremap <leader>nn :NERDTreeToggle<CR><C-w>=
+nnoremap <F2> :NERDTreeToggle<CR><C-w>=
 nnoremap <leader>nf :NERDTreeFind<CR><C-w>=
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeWinSize= 50
@@ -678,4 +678,4 @@ map <leader>ag :Ag<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => tagbar
-nmap <F2> :TagbarToggle<CR><C-w>=
+nmap <F3> :TagbarToggle<CR><C-w>=
