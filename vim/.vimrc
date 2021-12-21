@@ -63,9 +63,9 @@ map <leader>ab :echo expand("%:p")<cr>
 " Copy the absolute path of current buffer
 map <leader>cp :<C-u>call CopyPath()<cr>
 
-" Copy the content of current file and prepare to edit in anthor file
-map <leader>cg ggVGy:<C-u>call CopyPath()<cr>:tabnew<cr>:tabmove -1<cr>:e <C-r><C-o>p
-
+" Copy the content of current file and prepare to edit the content in anthor file
+map <leader>ct ggVGy:<C-u>call CopyPath()<cr>:tabnew<cr>:tabmove -1<cr>:e <C-r><C-o>p
+map <leader>cw ggVGy:<C-u>call CopyPath()<cr>:e <C-r><C-o>p
 
 " Disable preview window for complete
 set completeopt=menu,menuone
