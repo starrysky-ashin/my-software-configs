@@ -270,8 +270,8 @@ map <leader>ba :bufdo bd<cr>
 
 
 " Useful mappings for managing tabs"
-map <leader>tn :tabnew<cr>:tabmove -1<cr>
-map <leader>tN :tabnew<cr>
+map <leader>tN :tabnew<cr>:tabmove -1<cr>
+map <leader>tn :tabnew<cr>
 map <leader>tt :tablast<cr>:tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
