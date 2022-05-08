@@ -54,17 +54,10 @@ command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 nnoremap <leader>ev :vsp $MYVIMRC<CR>
 nnoremap <leader>sv :w<CR>:source $MYVIMRC<CR>
 
-" List all buffers"
-map <leader>ls :ls<cr>
-
 " Show absolute path of current buffer
 map <leader>ab :echo expand("%:p")<cr>
 
-" Copy the absolute path of current buffer
-map <leader>cp :<C-u>call CopyPath()<cr>
-
 " Copy the content of current file and prepare to edit the content in anthor file
-map <leader>ct ggVGy:<C-u>call CopyPath()<cr>:tabnew<cr>:tabmove -1<cr>:e <C-r><C-o>p
 map <leader>cw ggVGy:<C-u>call CopyPath()<cr>:e <C-r><C-o>p
 
 " Disable preview window for complete
@@ -221,10 +214,10 @@ vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>N
 " => Command mode related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Bash like keys for the command line"
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
-cnoremap <C-b> <Left>
-cnoremap <C-f> <Right>
+cnoremap <c-a> <Home>
+cnoremap <c-e> <End>
+cnoremap <c-b> <Left>
+cnoremap <c-f> <Right>
 cnoremap <c-k> <c-\>e getcmdpos() == 1 ? '' : getcmdline()[:getcmdpos()-2]<CR>
 
 
@@ -255,10 +248,6 @@ map <leader>wa :qa<cr>
 " Keep only current window"
 map <leader>wo :only<cr>
 
-" Smart way to switch buffers according to the order of buffer list
-map <leader>bk :bnext<cr>
-map <leader>bj :bprevious<cr>
-
 " Switch to the buffer previously opened in current window"
 map <leader>bp :b#<cr>
 
@@ -268,11 +257,15 @@ map <leader>bc :Bclose<cr>
 " Close all the buffers"
 map <leader>ba :bufdo bd<cr>
 
+" Del current file in buffers
+map <leader>d. :NERDTreeFind<cr><c-w>=md
+
+" Rename/move current opened file
+map <leader>m. :NERDTreeFind<cr><c-w>=mm
 
 " Useful mappings for managing tabs"
 map <leader>tN :tabnew<cr>:tabmove -1<cr>
 map <leader>tn :tabnew<cr>
-map <leader>tt :tablast<cr>:tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove +1<cr>
@@ -334,19 +327,19 @@ inoremap "" ""<Left>
 inoremap '' ''<Left>
 inoremap <> <><Left>
 inoremap jk <ESC>
-inoremap <C-d> <Del>
-inoremap <C-k> <C-o>D
-inoremap <C-f> <Right>
-inoremap <C-b> <Left>
+inoremap <c-d> <Del>
+inoremap <c-k> <C-o>D
+inoremap <c-f> <Right>
+inoremap <c-b> <Left>
 
 " Remap for normal mode"
-nnoremap <C-j> o<ESC>
-nnoremap <C-e> //e<CR>
-nnoremap <C-g> ggVG<CR>
+nnoremap <c-j> o<ESC>
+nnoremap <c-e> //e<CR>
+nnoremap <c-g> ggVG<CR>
 
 " Remap for visual mode"
-vnoremap <C-e> <ESC>
-vnoremap <C-g> ggVG<CR>
+vnoremap <c-e> <ESC>
+vnoremap <c-g> ggVG<CR>
 
 " Delete trailing white space on save, useful for some filetypes"
 fun! CleanExtraSpaces()
@@ -541,7 +534,6 @@ Plug 'preservim/tagbar'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
 " Git
@@ -564,7 +556,7 @@ nnoremap <leader>nf :NERDTreeFind<CR><C-w>=
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeWinSize= 50
 let NERDTreeShowHidden=1
-" autocmd vimenter * NERDTree
+autocmd vimenter * NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
