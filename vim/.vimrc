@@ -37,7 +37,8 @@ au FocusGained,BufEnter * checktime
 " With a map leader, it's possible to do extra key combinations"
 let mapleader = ";"
 
-" Remap <leader>; to ; in normal and visual mode, for jumping to the next matched character in the line
+" Remap <leader>; to ; in normal and visual mode, for jumping to the next
+" matched character in the line
 nnoremap <leader>; ;
 vnoremap <leader>; ;
 
@@ -57,7 +58,8 @@ nnoremap <leader>sv :w<CR>:source $MYVIMRC<CR>
 " Show absolute path of current buffer
 map <leader>ab :echo expand("%:p")<cr>
 
-" Copy the content of current file and prepare to edit the content in anthor file
+" Copy the content of current file and prepare to edit the content in anthor
+" file
 map <leader>cw ggVGy:<C-u>call CopyPath()<cr>:e <C-r><C-o>p
 
 " Disable preview window for complete
@@ -192,9 +194,9 @@ set smarttab
 set shiftwidth=4
 set tabstop=4
 
-" Linebreak on 120 characters"
+" Linebreak on 80 characters"
 set lbr
-set tw=120
+set tw=80
 
 set ai "Auto indent"
 set si "Smart indent"
@@ -305,7 +307,7 @@ catch
 endtry
 
 " Return to the last editing position when opening files (You want this!)"
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal!  g'\"" | endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -333,7 +335,7 @@ inoremap <c-f> <Right>
 inoremap <c-b> <Left>
 
 " Remap for normal mode"
-nnoremap <c-j> o<ESC>
+" nnoremap <c-j> o<ESC>
 nnoremap <c-e> //e<CR>
 nnoremap <c-g> ggVG<CR>
 
@@ -492,7 +494,7 @@ endfunc
 
 func! ToggleCC()
   if &cc == ''
-    set cc=120
+    set cc=80
   else
     set cc=
   endif
@@ -569,8 +571,9 @@ nmap ga <Plug>(EasyAlign)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => gutentags
 set tags=./.tags;,.tags
-" gutentags plugin searches for the tag file by recursively traversing the folders in the project root. 
-" The project root dir is determined by the following sub dir names.
+" gutentags plugin searches for the tag file by recursively traversing the
+" folders in the project root.  The project root dir is determined by the
+" following sub dir names.
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
 " tag file name
 let g:gutentags_ctags_tagfile = '.tags'
