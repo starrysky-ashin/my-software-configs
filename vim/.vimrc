@@ -336,6 +336,7 @@ inoremap <c-b> <Left>
 
 " Remap for normal mode"
 " nnoremap <c-j> o<ESC>
+nnoremap <Enter> o<ESC>
 nnoremap <c-e> //e<CR>
 nnoremap <c-g> ggVG<CR>
 
