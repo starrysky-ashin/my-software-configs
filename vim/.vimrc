@@ -43,17 +43,17 @@ nnoremap <leader>; ;
 vnoremap <leader>; ;
 
 " Fast save the changes in current buffer"
-nmap <leader>ss :w!<cr>
+nmap <leader>s :w!<cr>
 
 " Fast save the buffer opened in current window, and then close the window"
-nmap <leader>sc :w!<cr>:q<cr>
+" nmap <leader>sc :w!<cr>:q<cr>
 
 " :W sudo saves the file (useful for handling the permission-denied error)"
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
 " Fast edit and source .vimrc"
-nnoremap <leader>ev :vsp $MYVIMRC<CR>
-nnoremap <leader>sv :w<CR>:source $MYVIMRC<CR>
+" nnoremap <leader>ev :vsp $MYVIMRC<CR>
+nnoremap <leader>rc :w<CR>:source $MYVIMRC<CR>
 
 " Show absolute path of current buffer
 map <leader>ab :echo expand("%:p")<cr>
@@ -559,7 +559,7 @@ nnoremap <leader>nf :NERDTreeFind<CR><C-w>=
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeWinSize= 50
 let NERDTreeShowHidden=1
-autocmd vimenter * NERDTree
+autocmd vimenter * NERDTree :NERDTreeToggle
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
