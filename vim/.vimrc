@@ -236,8 +236,6 @@ nnoremap * *N
 map <silent> <leader><cr> :noh<cr>
 
 " Remap the prefix key of window operations"
-map <leader>w <C-w>
-
 " Move windows"
 map <leader>wm <C-w>r
 
@@ -675,4 +673,4 @@ map <leader>rg :Rg<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => tagbar
-nmap <F3> :TagbarToggle<CR><C-w>=
+nmap <F3> :TagbarToggle f<CR><C-w>=
