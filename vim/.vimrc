@@ -236,6 +236,14 @@ nnoremap * *N
 map <silent> <leader><cr> :noh<cr>
 
 " Remap the prefix key of window operations"
+" Split window
+map <leader>wv <C-w>v
+map <leader>ws <C-w>s
+
+" Jump to left/right windows
+map <leader>wh <C-w>h
+map <leader>wl <C-w>l
+
 " Move windows"
 map <leader>wm <C-w>r
 
