@@ -1,4 +1,4 @@
-# my_software_configs
+# My Software Configs for Ubuntu
 
 This repo maintains my config files for vim, zsh, git, and tmux. It will help to
 set up a deeply personal Linux environment, which is convenient and fast for
