@@ -1,23 +1,15 @@
 import shutil
 import os
 import os.path as osp
+import argparse
 from glob import glob
 
-# path
 HOME = osp.expanduser("~")
-root = osp.split(osp.split(osp.abspath(__file__))[0])[0]
-python_interp_path = osp.join(HOME, "anaconda3/bin/python")
-python_lib_dir = glob(osp.join(HOME, "anaconda3/lib/python*/site-packages"))[-1]
-# python_tag_file = osp.join(HOME, ".cache/tags/py-site-packages.tags")
+ROOT = osp.split(osp.split(osp.abspath(__file__))[0])[0]
 
-# user
-my_email = "x.jin@nuaa.edu.cn"
-my_name = "jinxin"
-
-
-def process_git():
-    git_config_file = osp.join(root, "git", ".gitconfig")
-    git_ignore_global_file = osp.join(root, "git", ".gitignore_global")
+def process_git(my_email, my_name):
+    git_config_file = osp.join(ROOT, "git", ".gitconfig")
+    git_ignore_global_file = osp.join(ROOT, "git", ".gitignore_global")
 
     entry_config_file = osp.join(HOME, ".gitconfig")
     if osp.exists(entry_config_file):
@@ -51,7 +43,7 @@ def process_git():
 
 
 def process_tmux():
-    tmux_config_file = osp.join(root, "tmux", ".tmux.conf")
+    tmux_config_file = osp.join(ROOT, "tmux", ".tmux.conf")
     entry_tmux_config_file = osp.join(HOME, ".tmux.conf")
 
     if osp.exists(entry_tmux_config_file):
@@ -66,9 +58,9 @@ def process_tmux():
     print("Finish writing config info to ~/.tmux.conf!\n")
 
 
-def process_vim():
-    vim_rc_file = osp.join(root, "vim", ".vimrc")
-    ycm_global_ycm_extra_conf_file = osp.join(root, "vim", ".ycm_global_ycm_extra_conf.py")
+def process_vim(python_interp, python_lib):
+    vim_rc_file = osp.join(ROOT, "vim", ".vimrc")
+    ycm_global_ycm_extra_conf_file = osp.join(ROOT, "vim", ".ycm_global_ycm_extra_conf.py")
     entry_vim_rc_file = osp.join(HOME, ".vimrc")
 
     if osp.exists(entry_vim_rc_file):
@@ -81,19 +73,9 @@ def process_vim():
         source_str += "\n"
         f.write(source_str)
 
-        # ctags_str = "\" ctags path config\n"
-        # ctags_str += "let $python_lib_dir = \"%s\"\n" % python_lib_dir
-        # ctags_str += "let $python_tag_file = \"%s\"\n" % python_tag_file
-        # ctags_str += "let $ext_tag_file = $python_tag_file\n"
-        # ctags_str += r"nnoremap <F9> :AsyncRun! ctags -f $python_tag_file -R $python_lib_dir<cr>"
-        # ctags_str += "\n"
-        # ctags_str += r"nnoremap <F10> :call ToggleExtTags($ext_tag_file)<CR>"
-        # ctags_str += "\n\n"
-        # f.write(ctags_str)
-
         ycm_str = "\" ycm path config\n"
-        ycm_str += "let g:ycm_python_interpreter_path = \"%s\"\n" % python_interp_path
-        ycm_str += "let g:ycm_python_sys_path = [%s]\n" % ("\"" + python_lib_dir + "\"")
+        ycm_str += "let g:ycm_python_interpreter_path = \"%s\"\n" % python_interp
+        ycm_str += "let g:ycm_python_sys_path = [%s]\n" % ("\"" + python_lib + "\"")
         ycm_str += "let g:ycm_global_ycm_extra_conf = \"%s\"\n" %  ycm_global_ycm_extra_conf_file
         ycm_str += "\n"
         f.write(ycm_str)
@@ -104,7 +86,7 @@ def process_vim():
 
 
 def process_zsh():
-    zsh_rc_file = osp.join(root, "zsh", ".zshrc")
+    zsh_rc_file = osp.join(ROOT, "zsh", ".zshrc")
     entry_zsh_rc_file = osp.join(HOME, ".zshrc")
 
     if osp.exists(entry_zsh_rc_file):
@@ -147,7 +129,21 @@ def process_zsh():
 
 
 if __name__ == "__main__":
-    process_git()
+    parser = argparse.ArgumentParser(description='config for linux softwares')
+    parser.add_argument('--python_interp', type=str,
+            default=osp.join(HOME, "anaconda3/bin/python"))
+    parser.add_argument('--python_lib', type=str,
+            default=osp.join(HOME, "anaconda3/lib/python*/site-packages"))
+    parser.add_argument('--my_email', type=str,
+            default="jinxin.ashin@outlook.com")
+    parser.add_argument('--my_name', type=str, default="jinxin")
+    args = parser.parse_args()
+
+    python_interp = args.python_interp
+    python_lib = args.python_lib
+    my_email = args.my_email
+    my_name = args.my_name
+    process_git(my_email, my_name)
     process_tmux()
-    process_vim()
+    process_vim(python_interp, python_lib)
     process_zsh()

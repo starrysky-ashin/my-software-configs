@@ -244,6 +244,10 @@ map <leader>ws <C-w>s
 map <leader>wh <C-w>h
 map <leader>wl <C-w>l
 
+" Jump to up/down windows
+map <leader>wk <C-w>k
+map <leader>wj <C-w>j
+
 " Move windows"
 map <leader>wm <C-w>r
 
