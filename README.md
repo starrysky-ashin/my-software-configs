@@ -1,4 +1,4 @@
-# my_software_configs
+# My Software Configs for Ubuntu
 
 This repo maintains my config files for vim, zsh, git, and tmux. It will help to
 set up a deeply personal Linux environment, which is convenient and fast for
@@ -41,7 +41,7 @@ of `oh-my-zsh` can refer to <https://zhuanlan.zhihu.com/p/58073103>. The reason
 Anaconda provides an extremely convenient way to set up customized scientific
 computing environment (not just for python).  We suggest to use Anaconda to set
 up a default environment for our daily use, including Python, gcc, and even some
-practical tools like `glances`.
+practical tools like `glances` (installed by pip).
 
 We suggest to install commonly used packages (e.g., PyTorch for a deep learning
 practitioner) within the default conda env which is typically named as `base`.
